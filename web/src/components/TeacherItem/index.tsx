@@ -4,32 +4,42 @@ import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
 
 import './styles.css'
 
-const TeacherItem: React.FC = () => {
+export interface Teacher {
+  id: number;
+  avatar: string;
+  bio: string;
+  cost: number;
+  name: string;
+  subject: string;
+  whatsapp: string;
+}
+
+interface TeacherItemProps{
+  teacher: Teacher;
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
   return (
     <article className="teacher-item">
           <header>
-            <img src="https://avatars1.githubusercontent.com/u/37074720?v=4" alt="Clovijan Rocha"/>
+            <img src={teacher.avatar} alt={teacher.name}/>
             <div>
-              <strong>Clovijan Rocha</strong>
-              <span>Geografia</span>
+              <strong>{teacher.name}</strong>
+              <span>{teacher.subject}</span>
             </div>
           </header>
 
-          <p>
-            Entusiatas das melhores tecnologias de Geografia avançada
-            <br/><br/>
-            Engajado com os alunos e preocupado com o apredizado de todos, buscando o máximo de experiência.
-          </p>
+          <p>{teacher.bio}</p>
 
           <footer>
             <p>
               Preço/Hora
-              <strong>R$ 90,00</strong>
+              <strong>{teacher.cost}</strong>
             </p>
-            <button type="button">
+            <a href={`https://wa.me/${teacher.whatsapp}`}>
               <img src={whatsappIcon} alt="whatsapp"/>
               Entrar em contato 
-            </button>
+            </a>
           </footer>
         </article>
   );
